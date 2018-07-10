@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/jock-dalby/webpack-custom-config/issues"
   },
-  "homepage": "https://github.com/jock-dalby/webpack-custom-config#readme"
+  "homepage": "https://github.com/jock-dalby/webpack-custom-config#readme",
+  "devDependencies": {
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  }
 }
