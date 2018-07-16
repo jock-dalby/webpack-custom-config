@@ -17,5 +17,25 @@ module.exports = {
     // path.resolve will then take current dir, add /dist and output an absolute path
     path: path.resolve(__dirname, 'dist'),
     publicPath: '',
+  },
+  resolve: {
+  // tell webpack to be aware of certain extensions, and if it encounters an import without
+  // an extensions, it should try the ones listed in extensions and see if it can find a file
+  // with that extension.
+    extensions: ['.js', '.jsx']
+  },
+  module: {
+    rules: [
+      {
+        // test if a file webpack has identified meets certain criteria.
+        // Here, anything ending in .js then apply a certain loader
+        test: /\.js$/,
+        // a loader is a 3rd part package which does something to the file
+        // babel is the defacto standard for transpiling next gen js to current gen js
+        loader: '',
+        // exclude any files with node_modules in the file path
+        exclude: /node_modules/
+      }
+  ]
   }
 };
