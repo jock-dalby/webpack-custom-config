@@ -84,6 +84,18 @@ module.exports = {
           // then css loader, which helps it understand the css imports and then applies the style-loader
           // on the extracted css code.
         ]
+      },
+      {
+        // test for images (files ending in .png, .jpeg, .jpg or .gif)
+        test: /\.(png|jpe?g|gif)$/,
+        // url-loader will take the images and if they are below a certain limit we define, it will convert them
+        // into data64 url's which can be inlined in documents so don't need to be downloaded each time.
+
+        // Use query params here to assign a fallback loader if the limit is exceeded. For images that
+        // are above the limit file-loader will copy the images to the output folder and then generate a link to
+        // these files and put a link to imports in components.
+        // images will be copied into dist/images with image name and extension used to name it
+        loader: 'url-loader?limit=8000&name=images/[name].[ext]'
       }
     ]
   }
