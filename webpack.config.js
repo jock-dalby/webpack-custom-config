@@ -32,10 +32,14 @@ module.exports = {
         test: /\.js$/,
         // a loader is a 3rd part package which does something to the file
         // babel is the defacto standard for transpiling next gen js to current gen js
-        loader: '',
+        // npm i --save-dev babel-loader babel-core babel-preset-react babel-react-env
+        // babel-loader will look for the .babelrc file which we have configured to
+        // transpile from react (jsx) and transpile into js that runs in browsers which
+        // have greater than 1% market share or last 2 versions.
+        loader: 'babel-loader',
         // exclude any files with node_modules in the file path
         exclude: /node_modules/
       }
-  ]
+    ]
   }
 };
