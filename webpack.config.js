@@ -1,4 +1,5 @@
 const path = require('path');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   // what kind of source maps (if any) webpack should generate
@@ -39,6 +40,50 @@ module.exports = {
         loader: 'babel-loader',
         // exclude any files with node_modules in the file path
         exclude: /node_modules/
+      },
+      {
+        // test for files ending .css
+        test: /\.css$/,
+        exclude: /node_modules/,
+        // loader is short form if want to setup a prepackaged loader, use is to setup custom loader
+        // use takes an array of the loaders we want to apply
+        use: [
+          // extracts css code form css files and injects it at top of html file to reduce amount of files we have to download
+          { loader: 'style-loader' },
+          // tells webpack what to do with the .css imports
+          {
+            loader: 'css-loader',
+            options: {
+              // Tell css loader we will be running 1 loader before this loader (stupidly named postcss-loader)
+              importLoaders: 1,
+              // Yes we want css modules
+              modules: true ,
+              // how the css modules should be named.
+              // Modules will be named first the name of the class defined in css, double underscore, then the name of the
+              // component and then a hash
+              localIdentName: '[name]__[local]__[hash:base64:5]'
+            }
+          },
+          {
+            // postcss-loader is a loader that allows us to transform the css
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => {
+                autoprefixer({
+                  browsers: [
+                    "> 1%",
+                    "last 2 versions"
+                  ]
+                })
+              }
+            }
+          }
+          // These loaders must be defined in this order because webpack parses loaders and applies them from last to first.
+          // So here, webpack will take the postcss-loader to transform css to suit popular browsers,
+          // then css loader, which helps it understand the css imports and then applies the style-loader
+          // on the extracted css code.
+        ]
       }
     ]
   }

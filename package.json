@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/jock-dalby/webpack-custom-config#readme",
   "devDependencies": {
+    "auto-prefixer": "^0.4.2",
+    "css-loader": "^1.0.0",
+    "postcss-loader": "^2.1.6",
+    "style-loader": "^0.21.0",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   },
