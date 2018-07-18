@@ -11,6 +11,10 @@ module.exports = {
   output: {
     // what the file should be called
     filename: 'bundle.js',
+    // what lazy loaded files will be called.
+    // Need a variable becuase dynamically created and can use the id that is generated
+    // Had to add "syntax-dynamic-import" plugin to .babelrc so webpack can understand import statements
+    chunkFilename: '[id].js',
     // where bundle.js should be output
     // path.resolve allows us to generate an absolute path
     // __dirname is a node prop and refers to directory the file is run in
